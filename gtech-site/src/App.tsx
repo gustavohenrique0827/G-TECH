@@ -16,7 +16,8 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 function HomeShell({ isClient }: { isClient: boolean }) {
   const location = useLocation();
-  const hideMarketingWhenPortal = location.pathname === "/portal";
+  const isPortalRoute = location.pathname === "/portal";
+  const hideMarketingWhenPortal = isPortalRoute;
 
   useEffect(() => {
     // Quando entrar em uma rota “posterior” (ex: /blog), manter a home completa
