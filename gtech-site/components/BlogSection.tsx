@@ -12,7 +12,7 @@ const posts = [
     readTime: "5 min",
     title: "Como a automação reduz o tempo do ciclo comercial",
     summary:
-      "Aprenda como agentes e workflows encurtam etapas do funil, qualificam leads automaticamente e elevam a conversão com dados acionáveis.",
+      "Aprenda como agentes e workflows encurtam etapas do funil, qualificam leads automaticamente e elevam a conversão com dados acionáveis — sem perder governança.",
     accentColor: "#5EEAD4",
   },
   {
@@ -30,7 +30,7 @@ const posts = [
     readTime: "4 min",
     title: "Quando vale a pena usar IA no atendimento",
     summary:
-      "Veja quais processos geram retorno imediato com IA (e onde o toque humano continua indispensável para manter a experiência do cliente).",
+      "Veja quais processos geram retorno imediato com IA (e onde o toque humano continua indispensável) para manter experiência consistente em cada etapa.",
     accentColor: "#FDE68A",
   },
   {
@@ -39,7 +39,7 @@ const posts = [
     readTime: "6 min",
     title: "SDR com agentes: do lead ao agendamento sem fricção",
     summary:
-      "Um passo a passo prático de como estruturar perguntas, critérios de qualificação e integrações para agendar reuniões com consistência.",
+      "Um passo a passo prático de como estruturar perguntas, critérios de qualificação e integrações para agendar reuniões com consistência e menor churn de pipeline.",
     accentColor: "#86EFAC",
   },
   {
@@ -48,7 +48,7 @@ const posts = [
     readTime: "5 min",
     title: "Métricas que realmente importam para aumentar ROI",
     summary:
-      "Quais números acompanhar no funil, na qualidade do atendimento e na performance dos agentes — e como transformar métricas em ações rápidas.",
+      "Quais números acompanhar no funil, na qualidade do atendimento e na performance dos agentes — e como transformar métricas em rotinas de melhoria contínua.",
     accentColor: "#93C5FD",
   },
   {
@@ -59,6 +59,42 @@ const posts = [
     summary:
       "Como evitar respostas genéricas e construir fluxos que respeitam contexto, histórico e regras de negócio (com automação e segurança).",
     accentColor: "#FBBF24",
+  },
+  {
+    category: "Automação",
+    categoryColor: "accent" as const,
+    readTime: "6 min",
+    title: "Playbooks de automação: o que documentar para escalar",
+    summary:
+      "Guia rápido do que registrar (gatilhos, regras, exceções e auditoria) para que sua automação cresça sem virar “caixa-preta” para o time.",
+    accentColor: "#34D399",
+  },
+  {
+    category: "Segurança",
+    categoryColor: "purple" as const,
+    readTime: "5 min",
+    title: "Trilhas de auditoria e LGPD: automação com segurança por padrão",
+    summary:
+      "Boas práticas para retenção, logs e tratamento de dados pessoais em fluxos automatizados — reduzindo risco e retrabalho em auditorias.",
+    accentColor: "#C4B5FD",
+  },
+  {
+    category: "BPO",
+    categoryColor: "amber" as const,
+    readTime: "7 min",
+    title: "Como estruturar SLA operacional (de verdade) em times híbridos",
+    summary:
+      "Como definir SLAs por fila/criticidade, medir conformidade e ajustar capacidade ao longo do tempo com foco em resultado.",
+    accentColor: "#FBBF24",
+  },
+  {
+    category: "IA",
+    categoryColor: "primary" as const,
+    readTime: "4 min",
+    title: "Prompting pragmático: menos texto, mais precisão",
+    summary:
+      "Técnicas para melhorar resposta do modelo: contexto mínimo, exemplos, formato de saída e validações para reduzir alucinações.",
+    accentColor: "#60A5FA",
   },
 ];
 

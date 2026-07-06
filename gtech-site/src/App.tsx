@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ServicesGrid from "@/components/ServicesGrid";
@@ -12,6 +13,63 @@ import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+
+function HomeShell({ isClient }: { isClient: boolean }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Quando entrar em uma rota “posterior” (ex: /blog), manter a home completa
+    // e rolar até a seção correspondente.
+    const sectionId =
+      location.pathname === "/"
+        ? null
+        : location.pathname === "/blog"
+          ? "blog"
+          : location.pathname === "/contato"
+            ? "contato"
+            : location.pathname === "/cases"
+              ? "cases"
+              : location.pathname === "/solucoes"
+                ? "solucoes"
+                : location.pathname === "/ia"
+                  ? "ia"
+                  : location.pathname === "/bpo"
+                    ? "bpo"
+                    : location.pathname === "/area-cliente" || location.pathname === "/cliente"
+                      ? "area-cliente"
+                      : location.pathname === "/portal"
+                        ? "portal"
+                        : null;
+
+    if (!sectionId) return;
+
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+
+    // offset simples do header fixo (aprox. 64px)
+    const y = el.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, [location.pathname]);
+
+  return (
+    <div className="bg-bg text-ink">
+      <Navbar />
+      <main>
+        <Hero />
+        <AboutSection />
+        <ServicesGrid />
+        <AISection />
+        <BPOSection />
+        {isClient ? <ClientPortalDashboard /> : <ClientAreaSection />}
+        <CasesSection />
+        <BlogSection />
+        <ContactSection />
+        <Footer />
+        <WhatsAppFloat />
+      </main>
+    </div>
+  );
+}
 
 export default function App() {
   const [isClient, setIsClient] = useState(false);
@@ -42,21 +100,19 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg-bg text-ink">
-      <Navbar />
-      <main>
-        <Hero />
-        <AboutSection />
-        <ServicesGrid />
-        <AISection />
-        <BPOSection />
-        {isClient ? <ClientPortalDashboard /> : <ClientAreaSection />}
-        <CasesSection />
-        <BlogSection />
-        <ContactSection />
-        <Footer />
-        <WhatsAppFloat />
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomeShell isClient={isClient} />} />
+      <Route path="/blog" element={<HomeShell isClient={isClient} />} />
+      <Route path="/contato" element={<HomeShell isClient={isClient} />} />
+      <Route path="/cases" element={<HomeShell isClient={isClient} />} />
+      <Route path="/solucoes" element={<HomeShell isClient={isClient} />} />
+      <Route path="/ia" element={<HomeShell isClient={isClient} />} />
+      <Route path="/bpo" element={<HomeShell isClient={isClient} />} />
+      <Route path="/area-cliente" element={<HomeShell isClient={isClient} />} />
+      <Route path="/cliente" element={<HomeShell isClient={isClient} />} />
+      <Route path="/portal" element={<HomeShell isClient={isClient} />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
+

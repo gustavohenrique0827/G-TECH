@@ -1,6 +1,7 @@
-"use client";
+ "use client";
 
 import { useMemo, useState } from "react";
+import { ChevronDown, ChevronUp, MessageSquareText } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -109,8 +110,13 @@ export default function ClientPortalDashboard() {
     return Math.max(pct, Math.round((1 - inProgressCount / Math.max(total, 1)) * 90));
   }, [deliveries, inProgressCount]);
 
-  const nextSteps = useMemo(
-    () => [
+  const [activeTicketId, setActiveTicketId] = useState<string>(() => "CH-2187");
+
+  const nextSteps = useMemo(() => {
+    const urgent = tickets.some((t) => t.slaHoursLeft <= 8);
+    const inReview = deliveries.some((d) => d.stage === "Em revisão");
+
+    const base = [
       {
         icon: RefreshCcw,
         title: "Rodar iteração do agente SDR",
@@ -121,17 +127,19 @@ export default function ClientPortalDashboard() {
         icon: Calendar,
         title: "Agendar validação de integração",
         desc: "Confirmar mapeamentos CRM → WhatsApp e ajustar rotas de mensagens.",
-        when: "Nesta semana",
+        when: inReview ? "Ainda esta semana" : "Nesta semana",
       },
       {
         icon: ShieldCheck,
         title: "Revisar segurança e permissões",
         desc: "Checagem de acessos, trilhas de auditoria e políticas de retenção.",
-        when: "Antes da entrega DEL-1038",
+        when: urgent ? "Antes de encerrar a SLA" : "Antes da entrega DEL-1038",
       },
-    ],
-    []
-  );
+    ];
+
+    return base;
+  }, [deliveries, tickets]);
+
 
   const lastReport = useMemo(() => {
     const dd = now.getDate();
@@ -150,8 +158,16 @@ export default function ClientPortalDashboard() {
   };
 
   return (
-    <section id="portal" className="border-t border-line bg-bg py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="portal" className="relative border-t border-line bg-bg py-24 overflow-hidden">
+      {/* Decorative fade (must not cover content) */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: "linear-gradient(to top, rgb(5, 7, 12), transparent)" }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div>
             <h2 className="font-display text-2xl font-semibold text-ink">Painel do Cliente</h2>
@@ -296,11 +312,18 @@ export default function ClientPortalDashboard() {
 
           <div className="rounded-2xl border border-line bg-bg p-6">
             <h3 className="font-semibold text-ink">Chamados abertos</h3>
-            <p className="mt-2 text-sm text-ink-muted">SLA e prioridade do ciclo atual.</p>
+            <p className="mt-2 text-sm text-ink-muted">SLA, prioridade e status do ciclo atual.</p>
 
             <div className="mt-5 space-y-3">
               {tickets.map((t) => {
-                const slaLabel = t.slaHoursLeft <= 8 ? "text-primary" : t.slaHoursLeft <= 16 ? "text-accent" : "text-ink-faint";
+                const slaLabel =
+                  t.slaHoursLeft <= 8
+                    ? "text-primary"
+                    : t.slaHoursLeft <= 16
+                      ? "text-accent"
+                      : "text-ink-faint";
+
+                const isActive = t.id === activeTicketId;
 
                 return (
                   <motion.div
@@ -311,24 +334,72 @@ export default function ClientPortalDashboard() {
                     transition={{ duration: 0.35 }}
                     className="rounded-xl border border-line bg-bg-elevated p-4"
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">{t.id}</p>
-                        <p className="mt-1 text-sm font-semibold text-ink">{t.title}</p>
-                        <p className="mt-1 text-xs text-ink-faint">Criado: {t.createdAt}</p>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTicketId(t.id)}
+                      className="w-full text-left"
+                      aria-expanded={isActive}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">{t.id}</p>
+                          <p className="mt-1 text-sm font-semibold text-ink">{t.title}</p>
+                          <p className="mt-1 text-xs text-ink-faint">Criado: {t.createdAt}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs font-medium text-ink-muted">{t.priority}</p>
+                          <p className={`mt-1 text-xs font-medium ${slaLabel}`}>SLA: {t.slaHoursLeft}h</p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="text-xs font-medium text-ink-muted">{t.priority}</p>
-                        <p className={`mt-1 text-xs font-medium ${slaLabel}`}>SLA: {t.slaHoursLeft}h</p>
+
+                      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-line">
+                        <div
+                          className="h-full bg-gradient-to-r from-primary via-accent to-purple"
+                          style={{ width: `${Math.max(8, Math.min(100, (t.slaHoursLeft / 24) * 100))}%` }}
+                          aria-hidden="true"
+                        />
                       </div>
-                    </div>
-                    <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-line">
-                      <div
-                        className="h-full bg-gradient-to-r from-primary via-accent to-purple"
-                        style={{ width: `${Math.max(8, Math.min(100, (t.slaHoursLeft / 24) * 100))}%` }}
-                        aria-hidden="true"
-                      />
-                    </div>
+
+                      {isActive && (
+                        <div className="mt-3 rounded-lg border border-line bg-bg p-3">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <p className="flex items-center gap-2 text-sm font-semibold text-ink">
+                                <MessageSquareText className="h-4 w-4 text-primary" aria-hidden="true" />
+                                Detalhe do chamado
+                              </p>
+                              <p className="mt-1 text-xs text-ink-faint">Status: {t.status}</p>
+                              <p className="mt-2 text-xs text-ink-muted leading-relaxed">
+                                Próxima ação (demo): alinhar critérios de qualificação e atualizar playbook para reduzir retrabalho e aumentar consistência.
+                              </p>
+                            </div>
+                            <div className="shrink-0 text-right">
+                              {t.slaHoursLeft <= 8 ? (
+                                <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-primary">
+                                  Prioritário
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center rounded-full border border-line bg-bg-elevated px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-ink-faint">
+                                  Em ciclo
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="mt-3 flex items-center justify-between gap-3">
+                            <p className="text-xs text-ink-faint">Última atualização: agora (demo)</p>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-ink-muted">Ver histórico</span>
+                              {isActive ? (
+                                <ChevronUp className="h-4 w-4 text-ink-faint" aria-hidden="true" />
+                              ) : (
+                                <ChevronDown className="h-4 w-4 text-ink-faint" aria-hidden="true" />
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </button>
                   </motion.div>
                 );
               })}
@@ -341,10 +412,41 @@ export default function ClientPortalDashboard() {
           <div className="rounded-2xl border border-line bg-bg p-6">
             <h4 className="font-medium text-ink">Atividades recentes</h4>
             <ul className="mt-4 space-y-3 text-sm text-ink-muted">
-              <li>• Atualização do processo de onboarding automática — 2 dias atrás</li>
-              <li>• Ajuste no fluxo de aprovação do pedido — 4 dias atrás</li>
-              <li>• Relatório quinzenal gerado — 6 dias atrás</li>
-              <li>• Auditoria de permissões e trilha de auditoria — 9 dias atrás</li>
+              {(() => {
+                const deliveryActivities = deliveries
+                  .map((d, idx) => ({
+                    key: `del-${d.id}`,
+                    label: `Entrega ${d.id}: ${d.title}`,
+                    daysAgo: 2 + idx * 2,
+                  }))
+                  .slice(0, 3);
+
+                const ticketActivities = tickets
+                  .map((t, idx) => ({
+                    key: `tkt-${t.id}`,
+                    label: `Chamado ${t.id}: ${t.title}`,
+                    daysAgo: 3 + idx * 2,
+                  }))
+                  .slice(0, 2);
+
+                const combined = [
+                  ...deliveryActivities,
+                  ...ticketActivities,
+                  {
+                    key: "report",
+                    label: "Relatório quinzenal gerado",
+                    daysAgo: 6,
+                  },
+                ]
+                  .sort((a, b) => a.daysAgo - b.daysAgo)
+                  .slice(0, 4);
+
+                return combined.map((a) => (
+                  <li key={a.key}>
+                    • {a.label} — {a.daysAgo} dia(s) atrás
+                  </li>
+                ));
+              })()}
             </ul>
           </div>
 
