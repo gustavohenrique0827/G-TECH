@@ -324,7 +324,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: contentY }}
-        className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-10 pt-8"
+className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-6 pt-6"
       >
 <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="relative z-20">

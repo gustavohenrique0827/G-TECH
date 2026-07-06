@@ -161,7 +161,7 @@ export default function AISection() {
     <section
       id="ia"
       aria-labelledby="ai-heading"
-      className="relative overflow-hidden border-t border-line bg-bg py-24 lg:py-32"
+className="relative overflow-hidden border-t border-line bg-bg py-20 lg:py-24"
     >
       <div className="absolute inset-0 bg-circuit opacity-40" />
       <GlowOrb color="accent" size={600} opacity={0.09} blur={130} className="top-[30%] left-[70%]" />

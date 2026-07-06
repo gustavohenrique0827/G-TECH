@@ -32,7 +32,7 @@ export default function AboutSection() {
     <section
       id="sobre"
       aria-labelledby="about-heading"
-      className="relative overflow-hidden border-t border-line bg-bg py-24 lg:py-32"
+className="relative overflow-hidden border-t border-line bg-bg py-20 lg:py-24"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-circuit opacity-50" />

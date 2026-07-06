@@ -177,7 +177,7 @@ export default function ServicesGrid() {
     <section
       id="solucoes"
       aria-labelledby="services-heading"
-      className="relative overflow-hidden border-t border-line bg-bg-elevated py-24 lg:py-32"
+className="relative overflow-hidden border-t border-line bg-bg-elevated py-20 lg:py-24"
     >
       {/* Background details */}
       <div className="absolute inset-0 bg-circuit-lg opacity-30" />
