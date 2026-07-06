@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Clock } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, Sparkles } from "lucide-react";
 import SectionTitle from "./ui/SectionTitle";
 import Tag from "./ui/Tag";
 
@@ -12,7 +12,7 @@ const posts = [
     readTime: "5 min",
     title: "Como a automação reduz o tempo do ciclo comercial",
     summary:
-      "Use bots e workflows inteligentes para diminuir o ciclo de vendas e aumentar o volume de propostas qualificadas.",
+      "Aprenda como agentes e workflows encurtam etapas do funil, qualificam leads automaticamente e elevam a conversão com dados acionáveis.",
     accentColor: "#5EEAD4",
   },
   {
@@ -21,7 +21,7 @@ const posts = [
     readTime: "7 min",
     title: "TI terceirizada: mais resultado com menos risco",
     summary:
-      "Por que terceirizar TI pode reduzir custos, aumentar governança e liberar seu time para focar no negócio.",
+      "Entenda como governança, SLA e equipe dedicada reduzem custos, aumentam previsibilidade e liberam seu time para focar no core do negócio.",
     accentColor: "#A78BFA",
   },
   {
@@ -30,8 +30,35 @@ const posts = [
     readTime: "4 min",
     title: "Quando vale a pena usar IA no atendimento",
     summary:
-      "Quais processos de atendimento geram retorno imediato com IA e onde manter o toque humano faz diferença.",
+      "Veja quais processos geram retorno imediato com IA (e onde o toque humano continua indispensável para manter a experiência do cliente).",
     accentColor: "#FDE68A",
+  },
+  {
+    category: "IA",
+    categoryColor: "accent" as const,
+    readTime: "6 min",
+    title: "SDR com agentes: do lead ao agendamento sem fricção",
+    summary:
+      "Um passo a passo prático de como estruturar perguntas, critérios de qualificação e integrações para agendar reuniões com consistência.",
+    accentColor: "#86EFAC",
+  },
+  {
+    category: "Dados",
+    categoryColor: "primary" as const,
+    readTime: "5 min",
+    title: "Métricas que realmente importam para aumentar ROI",
+    summary:
+      "Quais números acompanhar no funil, na qualidade do atendimento e na performance dos agentes — e como transformar métricas em ações rápidas.",
+    accentColor: "#93C5FD",
+  },
+  {
+    category: "SaaS",
+    categoryColor: "amber" as const,
+    readTime: "8 min",
+    title: "Integrações CRM → WhatsApp: do “disparo” à conversa",
+    summary:
+      "Como evitar respostas genéricas e construir fluxos que respeitam contexto, histórico e regras de negócio (com automação e segurança).",
+    accentColor: "#FBBF24",
   },
 ];
 
@@ -53,18 +80,30 @@ export default function BlogSection() {
               <span className="text-gradient-primary">crescer com tecnologia</span>
             </>
           }
-          description="Insights, cases e orientações práticas para líderes que usam TI como vantagem competitiva."
+          description="Insights e orientações práticas para líderes que querem usar IA, automação e BPO tecnológico com foco em resultado."
         />
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <div className="mt-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <p className="text-sm text-ink-muted">
+            Novos conteúdos toda semana: do diagnóstico à implementação.
+          </p>
+          <div className="flex items-center gap-2 rounded-full border border-line bg-bg-elevated px-4 py-2">
+            <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
+            <span className="font-mono text-xs uppercase tracking-widest text-ink-faint">
+              atualizado regularmente
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {posts.map((post, i) => (
             <motion.article
               key={post.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-bg-card p-7 transition-all duration-400 hover:border-primary/15 hover:shadow-card-hover cursor-pointer"
+              transition={{ delay: i * 0.06, duration: 0.5 }}
+              className="group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-line bg-bg-card p-7 transition-all duration-400 hover:border-primary/15 hover:shadow-card-hover"
             >
               {/* Accent top line */}
               <div
@@ -96,10 +135,7 @@ export default function BlogSection() {
 
               {/* Footer */}
               <div className="mt-6 flex items-center gap-2 border-t border-line pt-4">
-                <BookOpen
-                  className="h-3.5 w-3.5 text-ink-faint"
-                  aria-hidden="true"
-                />
+                <BookOpen className="h-3.5 w-3.5 text-ink-faint" aria-hidden="true" />
                 <span className="text-xs text-ink-faint transition-colors duration-200 group-hover:text-primary">
                   Ler artigo completo
                 </span>
@@ -115,3 +151,4 @@ export default function BlogSection() {
     </section>
   );
 }
+

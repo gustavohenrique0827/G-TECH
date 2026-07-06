@@ -36,6 +36,10 @@ export default function GlowOrb({
         background: bg,
         filter: `blur(${blur}px)`,
         transform: "translate(-50%, -50%)",
+        // Fix: alguns navegadores podem colapsar o gradiente se o elemento estiver "vazio" visualmente.
+        // Garantimos também uma opacidade mínima e composição estável.
+        opacity: opacity < 0.03 ? 0.03 : opacity,
+        willChange: animate ? "transform, opacity" : undefined,
       }}
     />
   );

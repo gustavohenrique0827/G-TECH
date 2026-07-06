@@ -27,23 +27,39 @@ const columns = [
     title: "Contato",
     links: [
       { label: "Falar com Especialista", href: "#contato" },
-      { label: "WhatsApp", href: "https://wa.me/5511999999999" },
+      { label: "WhatsApp", href: "https://wa.me/5563981123932" },
       { label: "contato@gtech.com.br", href: "mailto:contato@gtech.com.br" },
     ],
   },
 ];
 
+// Links reais: ajustáveis a partir de variáveis de ambiente no futuro.
 const socials = [
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
-  { icon: Github, href: "https://github.com", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/company/g-tech", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/gtechoficiall?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
+  { icon: Youtube, href: "https://youtube.com/@gtech", label: "YouTube" },
+  { icon: Github, href: "https://github.com/gtech", label: "GitHub" },
 ];
 
 const techMarquee = [
-  "React", "Node.js", "Python", "OpenAI", "n8n", "AWS", "PostgreSQL",
-  "TypeScript", "Docker", "LangChain", "Supabase", "Vercel", "Redis",
-  "Kubernetes", "GraphQL", "FastAPI", "TailwindCSS", "Prisma",
+  "React",
+  "Node.js",
+  "Python",
+  "OpenAI",
+  "n8n",
+  "AWS",
+  "PostgreSQL",
+  "TypeScript",
+  "Docker",
+  "LangChain",
+  "Supabase",
+  "Vercel",
+  "Redis",
+  "Kubernetes",
+  "GraphQL",
+  "FastAPI",
+  "TailwindCSS",
+  "Prisma",
 ];
 
 export default function Footer() {
@@ -64,7 +80,9 @@ export default function Footer() {
                 className="font-mono text-xs uppercase tracking-widest text-ink-faint"
               >
                 {tech}
-                <span className="ml-8 text-primary/40" aria-hidden="true">·</span>
+                <span className="ml-8 text-primary/40" aria-hidden="true">
+                  ·
+                </span>
               </span>
             ))}
           </div>
@@ -74,7 +92,10 @@ export default function Footer() {
       {/* Main footer content */}
       <div className="relative mx-auto max-w-7xl px-6 py-16">
         {/* Noise texture */}
-        <div className="noise-overlay absolute inset-0 pointer-events-none" aria-hidden="true" />
+        <div
+          className="noise-overlay absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+        />
 
         <div className="relative grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
@@ -117,7 +138,7 @@ export default function Footer() {
             <div className="mt-6 flex items-center gap-2">
               <span className="live-dot" aria-hidden="true" />
               <span className="font-mono text-xs text-ink-faint">
-                Todos os sistemas operacionais
+                Governança e segurança por padrão
               </span>
             </div>
           </div>
@@ -134,10 +155,17 @@ export default function Footer() {
                     <a
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      rel={
+                        link.href.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       className="group flex items-center gap-1.5 text-sm text-ink-muted transition-colors duration-200 hover:text-ink"
                     >
-                      <span className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-3" aria-hidden="true" />
+                      <span
+                        className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-3"
+                        aria-hidden="true"
+                      />
                       {link.label}
                     </a>
                   </li>
@@ -169,7 +197,10 @@ export default function Footer() {
             className="group flex shrink-0 items-center gap-2 rounded-2xl border border-primary/30 bg-primary/10 px-5 py-2.5 text-sm font-medium text-primary transition-all duration-200 hover:border-primary/50 hover:bg-primary/20"
           >
             Falar com a G-TECH
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </a>
         </motion.div>
 
@@ -186,3 +217,4 @@ export default function Footer() {
     </footer>
   );
 }
+
