@@ -119,8 +119,6 @@ export default function App() {
       <Route path="/solucoes" element={<HomeShell isClient={isClient} />} />
       <Route path="/ia" element={<HomeShell isClient={isClient} />} />
       <Route path="/bpo" element={<HomeShell isClient={isClient} />} />
-      <Route path="/area-cliente" element={<HomeShell isClient={isClient} />} />
-      <Route path="/cliente" element={<HomeShell isClient={isClient} />} />
       <Route path="/portal" element={<HomeShell isClient={isClient} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
