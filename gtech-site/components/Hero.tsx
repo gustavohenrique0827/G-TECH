@@ -326,12 +326,14 @@ export default function Hero() {
         style={{ y: contentY }}
         className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-10 pt-8"
       >
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          {/* Left column */}
-          <div>
+<div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="relative z-20">
+
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-bg-elevated/80 px-5 py-2 backdrop-blur-sm">
               <span className="live-dot" aria-hidden="true" />
-              <span className="font-mono text-xs text-ink-muted">AI Powered Software House</span>
+              <span className="font-mono text-xs text-ink-muted">
+                AI Powered Software House
+              </span>
             </div>
 
             <motion.h1
@@ -341,12 +343,14 @@ export default function Hero() {
               className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.6rem]"
             >
               Transformamos
-              <span className="text-gradient-primary">operações</span> com IA, automação
-              e BPO tecnológico.
+              <span className="text-gradient-primary"> operações</span> com IA,
+              automação e BPO tecnológico.
             </motion.h1>
 
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-              Em vez de contratar um time inteiro, você recebe entrega com governança: integrações, automações e expertise técnico sênior — com tempo de resposta rápido.
+              Entrega com governança: integrações, automações e expertise técnico
+              sênior — para reduzir tempo, risco e custo de construir um time
+              interno.
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -358,7 +362,6 @@ export default function Hero() {
               </Button>
             </div>
 
-            {/* Trust indicators */}
             <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {floatingStats.map((stat) => (
                 <div
@@ -367,19 +370,27 @@ export default function Hero() {
                 >
                   <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div className="relative flex items-center gap-2">
-                    <stat.icon className="h-4 w-4" style={{ color: stat.color }} aria-hidden="true" />
+                    <stat.icon
+                      className="h-4 w-4"
+                      style={{ color: stat.color }}
+                      aria-hidden="true"
+                    />
                     <div>
-                      <p className="font-display text-base font-semibold" style={{ color: stat.color }}>
+                      <p
+                        className="font-display text-base font-semibold"
+                        style={{ color: stat.color }}
+                      >
                         {stat.value}
                       </p>
-                      <p className="text-[11px] text-ink-faint">{stat.label}</p>
+                      <p className="text-[11px] text-ink-faint">
+                        {stat.label}
+                      </p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Technology badges */}
             <div className="mt-7 flex flex-wrap gap-2">
               {[
                 { label: "IA & ML", tone: "#A78BFA" },
@@ -390,7 +401,7 @@ export default function Hero() {
                 <span
                   key={b.label}
                   className="rounded-full border border-line bg-bg-elevated/40 px-3 py-1 text-xs text-ink-muted backdrop-blur-sm"
-                  style={{ boxShadow: `0 0 0 1px rgba(134,239,172,0)`, borderColor: "rgba(255,255,255,0.06)" }}
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}
                 >
                   <span
                     className="mr-2 inline-block h-1.5 w-1.5 rounded-full"
@@ -402,7 +413,6 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Stats */}
             <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-ink-muted">
               {[
                 { k: "+120", v: "projetos entregues" },
@@ -418,7 +428,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right column (interactive premium visual) */}
           <div className="relative">
             <HeroVisual />
           </div>
@@ -433,4 +442,5 @@ export default function Hero() {
     </section>
   );
 }
+
 
