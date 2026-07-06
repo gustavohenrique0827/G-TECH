@@ -231,13 +231,13 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="tel:+551140001234"
+                href="tel:+5511988881234"
                 className="group flex items-center gap-3 text-sm text-ink-muted transition-colors hover:text-primary"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-line bg-bg transition-colors group-hover:border-primary/30 group-hover:bg-primary/8">
                   <Phone className="h-4 w-4" aria-hidden="true" />
                 </div>
-                (11) 4000-1234
+                (11) 98888-1234
               </a>
             </div>
 
